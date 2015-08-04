@@ -9,12 +9,7 @@
 <body>
 
 <ul>
-    <?php
-    include('../function.php');
-    foreach ($config['type_map'] as $type => $code) {
-        echo '<li><a href="/api.php?type=' . $type . '">' . $type . '</a></li>';
-    }
-    ?>
+
 </ul>
 
 </body>
