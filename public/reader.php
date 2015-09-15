@@ -10,8 +10,8 @@ ini_set('display_errors', 1);
 //error_reporting(0);
 //ini_set('display_errors', 0);
 
-$reader = new Reader_WarszawaUM($config);
+$reader = new Reader_WarszawaUM(array_merge($config['reader']['warszawa_um'], $config['reader']['basic']));
 $data = $reader->getData();
 
-$saver = new Saver_Mongo($config);
+$saver = new Saver_Mongo($config['saver']['mongo']);
 $saver->save($data);

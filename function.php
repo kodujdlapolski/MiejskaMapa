@@ -397,7 +397,7 @@ class Saver_Mongo extends Saver_Abstract
      */
     protected function _getCollection()
     {
-        $mongoConfig = $this->getOptions()->get('mongo');
+        $mongoConfig = $this->getOptions()->getAll();
 
         $mongo = new MongoClient($mongoConfig['server']);
         $db = $mongo->{$mongoConfig['db']};
@@ -436,8 +436,6 @@ class Saver_Mongo extends Saver_Abstract
         try {
             $collection->save($document);
         } catch (MongoException $e) {
-//            echo $e;
-//            var_dump($document);
         }
     }
 }
@@ -501,47 +499,3 @@ class Utils
         return $string;
     }
 }
-
-
-//
-//function getGeoJson($dataJson, $convert)
-//{
-//    $geo = array(
-//        'type' => 'FeatureCollection',
-////        'crs' => array(
-////            'type' => 'name',
-////            'properties' => array(
-////                'name' => 'urn:ogc:def:crs:EPSG:2178'
-////            )
-////        ),
-//        'features' => array()
-//    );
-//    $toConvert = array();
-//    foreach ($dataJson->foiarray as $points) {
-//        $toConvert[] = array($points->x, $points->y);
-//
-//        $newprop = array();
-//        if (isset($points->name)) {
-//            foreach (explode("\n", $points->name) as $prop) {
-//                $propA = explode(':', $prop);
-//                $newprop[Utils::clearString(array_shift($propA), false, false, true, false)] = trim(implode(':', $propA));
-//            }
-//        }
-//        $geo['features'][] = array(
-//            'type' => 'Feature',
-//            'id' => '',
-//            'geometry' => array(
-//                'type' => 'Point',
-//                'coordinates' => array((float)$points->x,(float)$points->y)
-//            ),
-//            'properties' => $newprop
-//        );
-//    }
-//
-//    if ($convert) {
-//        foreach (convertGeo($toConvert) as $k => $newGeo) {
-//            $geo['features'][$k]['geometry']['coordinates'] = $newGeo;
-//        }
-//    }
-//    return $geo;
-//}
